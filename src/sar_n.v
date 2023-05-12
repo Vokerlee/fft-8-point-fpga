@@ -18,4 +18,5 @@ module sar_n #(parameter N = 4, parameter SHFT = 1)
 
         out[(2 ** N) - 1 - 1 - SHFT : 0] <= in[(2 ** N) - 1 : SHFT];
     end
+
 endmodule

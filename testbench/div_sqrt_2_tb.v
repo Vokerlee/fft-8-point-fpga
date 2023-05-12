@@ -12,7 +12,7 @@ module test_div_sqrt_2 #(parameter N = 4);
         #1 clk = ~clk; // clk
     end
 
-    div_sqrt_2 div_sqrt_2_test(.a(a), .clk(clk), .rst(rst), .result(result));
+    div_sqrt_2 #(.N(N)) div_sqrt_2_test(.in(a), .clk(clk), .rst(rst), .out(result));
 
     initial begin
         $dumpfile("div_sqrt_2_tb.vcd");

@@ -1,6 +1,6 @@
 `timescale 1 ns / 100 ps
 
-module test_reg_n;
+module test_reg_n  #(parameter N = 4);
 
     reg [15 : 0] d = 16'b1011011000011100;
 
@@ -17,7 +17,7 @@ module test_reg_n;
 
     wire [15 : 0] q;
 
-    reg_n reg_n_test(.d(d), .clk(clk), .rst(rst), .q(q));
+    reg_n #(.N(N)) reg_n_test(.d(d), .clk(clk), .rst(rst), .q(q));
 
     initial begin
         $dumpfile("reg_n_tb.vcd");
