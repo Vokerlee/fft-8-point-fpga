@@ -1,6 +1,8 @@
+// D-Flip-Flop block
+
 module dff
 (
-    input d, rst, clk,
+    input d, clk, rst,
     output reg q
 );
     initial begin

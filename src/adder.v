@@ -1,18 +1,20 @@
+// Asynchronous adder of 2 numbers
+
 module adder #(parameter N = 4)
 (
-    input [(2 ** N) - 1 : 0] a, b,
     input add_mode,
-    output reg[(2 ** N) - 1 : 0] result
+    input [(2 ** N) - 1 : 0] summand_1, summand_2,
+    output reg[(2 ** N) - 1 : 0] res
 );
     always @(*)
     begin
         if (add_mode)
         begin
-            result = a + b;
+            res = summand_1 + summand_2;
         end
         else
         begin
-            result = a - b;
+            res = summand_1 - summand_2;
         end
     end
 

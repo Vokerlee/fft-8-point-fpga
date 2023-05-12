@@ -12,18 +12,18 @@ TB_SRC = $(wildcard $(TB_DIR)/*.v)
 TB_LIST = $(notdir $(TB_SRC))
 
 TB_OUT = $(SRC_LIST:%.v=$(BUILD_DIR)/%_tb.out)
-TB_DUMP = $(TB_LIST:%.v=$(DUMP_DIR)/%.dump)
+TB_DUMP = $(TB_LIST:%.v=$(DUMP_DIR)/%.vcd)
 
-all: build show
+all: build
 
-build: $(BUILD_DIR) $(TB_DUMP)
+build: $(DUMP_DIR) $(TB_DUMP)
 
-$(BUILD_DIR)/%_tb.out: $(SRC_DIR)/%.v $(TB_DIR)/%_tb.v
+$(BUILD_DIR)/%_tb.out: $(SRC) $(TB_DIR)/%_tb.v
 	$(SIMULATOR) $^ -o $@
 
-$(DUMP_DIR)/%.dump: $(BUILD_DIR)/%.out $(DUMP_DIR)
+$(DUMP_DIR)/%.vcd: $(BUILD_DIR)/%.out $(DUMP_DIR)
 	./$<
-	mv dump.vcd $@
+	mv $(notdir $@) $@
 
 $(DUMP_DIR): $(BUILD_DIR)
 	mkdir -p $@
@@ -31,8 +31,5 @@ $(DUMP_DIR): $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir -p $@
 
-show: $(TB_DUMP)
-	gtkwave $^
-
 clean:
-	rm -rf $(BUILD)
+	rm -rf $(BUILD_DIR)
