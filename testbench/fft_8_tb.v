@@ -2,13 +2,6 @@
 
 module test_fft_8 #(parameter N = 3);
 
-    reg clk = 1'b0;
-    always begin
-        #1 clk = ~clk; // clk
-    end
-
-    reg rst = 1'b0;
-
     reg [7 : 0] x1_real  = 8'b00111001;
     reg [7 : 0] x1_image = 8'b00000000;
 
@@ -39,7 +32,7 @@ module test_fft_8 #(parameter N = 3);
                  y7_real, y7_image, y8_real, y8_image;
 
     fft_8 #(.N(N)) fft_8_test(x1_real,  x2_real,  x3_real,  x4_real,  x5_real,  x6_real,  x7_real,  x8_real,
-                              x1_image, x2_image, x3_image, x4_image, x5_image, x6_image, x7_image, x8_image, clk, rst,
+                              x1_image, x2_image, x3_image, x4_image, x5_image, x6_image, x7_image, x8_image,
                               y1_real,  y2_real,  y3_real,  y4_real,  y5_real,  y6_real,  y7_real,  y8_real,
                               y1_image, y2_image, y3_image, y4_image, y5_image, y6_image, y7_image, y8_image);
 

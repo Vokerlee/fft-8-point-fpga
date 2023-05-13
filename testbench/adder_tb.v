@@ -9,7 +9,7 @@ module test_adder #(parameter N = 4);
 
     wire add_mode = 1'b0;
 
-    adder #(.N(N)) adder_test(.summand_1(s1), .summand_2(s2), .add_mode(add_mode), .res(result));
+    adder #(.N(N)) adder_test(add_mode, s1, s2, result);
 
     initial begin
         $dumpfile("adder_tb.vcd");
