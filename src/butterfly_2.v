@@ -12,13 +12,13 @@ module butterfly_2 #(parameter N = 4)
     adder #(.N(N)) a2(1'b1, in_1, in_2, s2); // s2 = in_1 + in_2
 
     // Synchronize the operations
-    reg_n #(.N(N)) rr_1 (s1, clk, rst, s3); // s3 = s1
-    reg_n #(.N(N)) rr_2 (s2, clk, rst, s4); // s4 = s2
+    reg_n #(.N(N)) rr_1(s1, clk, rst, s3); // s3 = s1
+    reg_n #(.N(N)) rr_2(s2, clk, rst, s4); // s4 = s2
 
     div_sqrt_2 #(.N(N)) div_1(s3, clk, rst, s5); // s5 = (in_1 - in_2) * 0.7071
     div_sqrt_2 #(.N(N)) div_2(s4, clk, rst, s6); // s6 = (in_1 + in_2) * 0.7071
 
-    reg_n #(.N(N)) rr_3(s5, clk, rst, out_real);
-    reg_n #(.N(N)) rr_4(s6, clk, rst, out_image);
+    reg_n #(.N(N)) rr_3(s5, clk, rst, out_real);  // out_real  = (in_1 - in_2) * 0.7071
+    reg_n #(.N(N)) rr_4(s6, clk, rst, out_image); // out_image = (in_1 + in_2) * 0.7071
 
 endmodule
