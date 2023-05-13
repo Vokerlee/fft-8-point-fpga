@@ -1,6 +1,6 @@
 // Shift arithmetic register (SAR)
 
-module sar_n #(parameter N = 4, parameter SHFT = 1)
+module sar_n #(parameter N = 3, parameter SHFT = 1)
 (
     input [(2 ** N) - 1 : 0] in,
     output reg[(2 ** N) - 1 : 0] out

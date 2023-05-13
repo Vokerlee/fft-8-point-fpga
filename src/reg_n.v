@@ -1,6 +1,6 @@
 // Simple register made of D-Flip-Flops
 
-module reg_n #(parameter N = 4)
+module reg_n #(parameter N = 3)
 (
     input [(2 ** N) - 1 : 0] d,
     input clk, rst,
