@@ -1,4 +1,4 @@
-module butterfly_2 #(parameter N = 4)
+module butterfly_4 #(parameter N = 4)
 (
     input [(2 ** N) - 1 : 0] in_1_r, in_1_i, in_2_r, in_2_i,
     input clk, rst,

@@ -1,17 +1,21 @@
-module fft_stage3 #(parameter N = 4)
+module fft_stage_3 #(parameter N = 4)
 (
-    input [(2 ** N) - 1 : 0] a0, a1, ar2, ai2, ar3, ai3, a4, a5, ar6, ai6, ar7, ai7,
+    input [(2 ** N) - 1 : 0] in_0_r, in_1_r, in_2_r, in_3_r, in_4_r, in_5_r, in_6_r, in_7_r,
+                             in_0_i, in_1_i, in_2_i, in_3_i, in_4_i, in_5_i, in_6_i, in_7_i
     input clk, rst,
-    output [(2 ** N) - 1 : 0] y0, yr1, yi1, yr2, yi2, yr3, yi3, y4, yr5, yi5, yr6, yi6, yr7, yi7;
+    output [(2 ** N) - 1 : 0] out_0_r, out_1_r, out_2_r, out_3_r, out_4_r, out_5_r, out_6_r, out_7_r,
+                              out_0_i, out_1_i, out_2_i, out_3_i, out_4_i, out_5_i, out_6_i, out_7_i
 );
-    butterfly_1 bf1_1(a0, a1, clk, rst, y0, y4);
+    butterfly_1 #(.N(N)) bf_1(in_0_r,  in_0_i,  in_4_r,  in_4_i, clk, rst, 
+                              out_0_r, out_0_i, out_4_r, out_4_i);
 
-    butterfly_1 bf1_real(ar2, ar3, clk, rst, yr1, yr5); // Real part y1, y5
-    butterfly_1 bf1_imag(ai2, ai3, clk, rst, yi1, yi5); // imag part y1, y5
+    butterfly_2 #(.N(N)) bf_2(in_1_r,  in_1_i,  in_5_r,  in_5_i, clk, rst, 
+                              out_1_r, out_1_i, out_5_r, out_5_i);
+                              
+    butterfly_3 #(.N(N)) bf_3(in_2_r,  in_2_i,  in_6_r,  in_6_i, clk, rst, 
+                              out_2_r, out_2_i, out_6_r, out_6_i);
 
-    butterfly_3 bf2_1(a4, a5, clk, rst, yr2, yr6, yi2, yi6);
-
-    butterfly_1 bf2_real(ar6, ar6, clk, rst, yr3, yr7); // Real part y3, y7
-    butterfly_1 bf2_imag(ai6, ai6, clk, rst, yi3, yi7); // imag part y3, y7
+    butterfly_4 #(.N(N)) bf_4(in_3_r,  in_3_i,  in_7_r,  in_7_i, clk, rst, 
+                              out_3_r, out_3_i, out_7_r, out_7_i);
 
 endmodule
