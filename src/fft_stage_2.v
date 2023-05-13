@@ -1,33 +1,18 @@
-module fft_stage2 #(parameter N = 4)
+module fft_stage_2 #(parameter N = 4)
 (
-    input [(2 ** N) - 1 : 0] in_0, in_1, in_2, in_3, in_4, in_5, in_6, in_7,
+    input [(2 ** N) - 1 : 0] in_0_r, in_1_r, in_2_r, in_3_r, in_4_r, in_5_r, in_6_r, in_7_r,
+                             in_0_i, in_1_i, in_2_i, in_3_i, in_4_i, in_5_i, in_6_i, in_7_i
     input clk, rst,
-    output [(2 ** N) - 1 : 0] t0,
-                              tr1, ti1,
-                              t2,
-                              tr3, ti3,
-                              t4,
-                              tr5, ti5,
-                              t6,
-                              tr7, ti7
+    output [(2 ** N) - 1 : 0] out_0_r, out_1_r, out_2_r, out_3_r, out_4_r, out_5_r, out_6_r, out_7_r,
+                              out_0_i, out_1_i, out_2_i, out_3_i, out_4_i, out_5_i, out_6_i, out_7_i
 );
-    wire [(2 ** N) - 1 : 0] y0, y1, y2, y3, y4, yr5, yi5, y6, yr7, yi7;
-
-    butterfly_1 #(.N(N)) bf1_1(in_0, in_1, clk, rst, y0, y2);
-    butterfly_3 #(.N(N)) bf2_1(in_1, in_3, clk, rst, tr1, tr3, ti1, ti3);
-    butterfly_1 #(.N(N)) bf1_2(in_4, in_5, clk, rst, y4, y6);
-    butterfly_3 #(.N(N)) bf2_2(in_6, in_7, clk, rst, yr5, yr7, yi5, yi7);
-
-    // Synchronize the operations
-    delay #(.N(N)) d1(y0, clk, rst, t0);
-    delay #(.N(N)) d2(y2, clk, rst, t2);
-    delay #(.N(N)) d3(in_2, clk, rst, y1);
-    delay #(.N(N)) d4(in_3, clk, rst, y3);
-
-    delay #(.N(N)) d5(y4, clk, rst, t4);
-    delay #(.N(N)) d6(y6, clk, rst, t6);
-
-    butterfly_2 #(.N(N)) div1(yr5, yi5, clk, rst, tr5, ti5);
-    butterfly_2 #(.N(N)) div2(yr7, yi7, clk, rst, tr7, ti7);
+    butterfly_1 #(.N(N)) bf_1(in_0_r,  in_0_i,  in_2_r,  in_2_i, clk, rst, 
+                              out_0_r, out_0_i, out_2_r, out_2_i);
+    butterfly_3 #(.N(N)) bf_2(in_1_r,  in_1_i,  in_3_r,  in_3_i, clk, rst, 
+                              out_1_r, out_1_i, out_3_r, out_3_i);
+    butterfly_1 #(.N(N)) bf_3(in_4_r,  in_4_i,  in_6_r,  in_6_i, clk, rst, 
+                              out_4_r, out_4_i, out_6_r, out_6_i);
+    butterfly_3 #(.N(N)) bf_4(in_5_r,  in_5_i,  in_7_r,  in_7_i, clk, rst, 
+                              out_5_r, out_5_i, out_7_r, out_7_i);
 
 endmodule
