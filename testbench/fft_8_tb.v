@@ -2,6 +2,13 @@
 
 module test_fft_8 #(parameter N = 3);
 
+    reg clk = 1'b0;
+    always begin
+        #1 clk = ~clk; // clk
+    end
+
+    reg rst = 1'b0;
+
     reg [7 : 0] x1_real  = 8'b00111001;
     reg [7 : 0] x1_image = 8'b00000000;
 
@@ -14,16 +21,16 @@ module test_fft_8 #(parameter N = 3);
     reg [7 : 0] x4_real  = 8'b00111001;
     reg [7 : 0] x4_image = 8'b00000000;
 
-    reg [7 : 0] x5_real  = 8'b01010111;
+    reg [7 : 0] x5_real  = 8'b00111001;
     reg [7 : 0] x5_image = 8'b00000000;
 
     reg [7 : 0] x6_real  = 8'b01010111;
     reg [7 : 0] x6_image = 8'b00000000;
 
-    reg [7 : 0] x7_real  = 8'b00111001;
+    reg [7 : 0] x7_real  = 8'b01010111;
     reg [7 : 0] x7_image = 8'b00000000;
 
-    reg [7 : 0] x8_real  = 8'b01010111;
+    reg [7 : 0] x8_real  = 8'b00111001;
     reg [7 : 0] x8_image = 8'b00000000;
 
     wire [7 : 0] y1_real, y1_image, y2_real, y2_image,
