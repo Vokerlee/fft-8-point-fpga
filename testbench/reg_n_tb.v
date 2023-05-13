@@ -1,6 +1,6 @@
 `timescale 1 ns / 100 ps
 
-module test_reg_n  #(parameter N = 4);
+module test_reg_n #(parameter N = 4);
 
     reg [15 : 0] d = 16'b1011011000011100;
 

@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module test_adder;
+module test_adder #(parameter N = 4);
 
     reg [15 : 0] s1 = 16'b1011011000011100;
     reg [15 : 0] s2 = 16'b0110011000100111;
@@ -9,7 +9,7 @@ module test_adder;
 
     wire add_mode = 1'b0;
 
-    adder adder_test(.summand_1(s1), .summand_2(s2), .add_mode(add_mode), .res(result));
+    adder #(.N(N)) adder_test(.summand_1(s1), .summand_2(s2), .add_mode(add_mode), .res(result));
 
     initial begin
         $dumpfile("adder_tb.vcd");

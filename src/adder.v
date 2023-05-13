@@ -1,6 +1,6 @@
 // Asynchronous adder of 2 numbers
 
-module adder #(parameter N = 4)
+module adder #(parameter N = 3)
 (
     input add_mode,
     input [(2 ** N) - 1 : 0] summand_1, summand_2,
