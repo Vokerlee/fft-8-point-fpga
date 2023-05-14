@@ -24,6 +24,7 @@ $(BUILD_DIR)/%_tb.out: $(SRC) $(TB_DIR)/%_tb.v
 $(DUMP_DIR)/%.vcd: $(BUILD_DIR)/%.out $(DUMP_DIR)
 	./$<
 	mv $(notdir $@) $@
+	echo "=================================================="
 
 $(DUMP_DIR): $(BUILD_DIR)
 	mkdir -p $@
